@@ -77,7 +77,7 @@ custom_test_runner() {
     local forwarded_port=4723 # re-use appium server port if on device farm host
 
     local app_id
-    app_id=$(grep applicationId android/app/build.gradle | awk '{print $2}' | tr -d '"')
+    app_id=$(grep applicationId android/app/build.gradle -m1 | awk '{print $2}' | tr -d '"')
 #    local package
 #    package=app_id
 
@@ -110,7 +110,8 @@ custom_test_runner() {
     adb logcat -c
 
     # start app on device
-    adb shell am start -a android.intent.action.RUN -f 0x20000000 --ez enable-background-compilation true --ez enable-dart-profiling true --ez enable-checked-mode true --ez verify-entry-points true --ez start-paused true "$app_id/.MainActivity"
+     adb shell am start -a android.intent.action.RUN -f 0x20000000 --ez enable-background-compilation true --ez enable-dart-profiling true --ez enable-checked-mode true --ez verify-entry-points true --ez start-paused true "$app_id/.MainActivity"
+#    adb shell monkey -p br.com.estrategiaeducacional.concursos -c android.intent.category.LAUNCHER 1
 
     # wait for observatory startup on device and get port number
     obs_str=$( (adb logcat -v time &) | grep -m 1 "Observatory listening on")

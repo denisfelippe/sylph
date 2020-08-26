@@ -93,8 +93,8 @@ phases:
       # - bin/py.test tests/ --junit-xml $DEVICEFARM_LOG_DIR/junitreport.xml
       - cd flutter_app
       - rm -f .packages # todo: remove from bundle
-      - MAIN=test_driver/main.dart
-      - TESTS='test_driver/main_test.dart'
+      - MAIN=test_driver/app.dart
+      - TESTS='test_driver/app_test.dart'
       - >-
         if [ $DEVICEFARM_DEVICE_PLATFORM_NAME = "Android" ];
         then
